@@ -5,7 +5,7 @@ int servoPin = 8;
 Servo servo1;
 
 void setup() {
-  // initialize serial communication:
+  
   Serial.begin(9600);
   servo1.attach(servoPin);
   pinMode(2,INPUT);
@@ -31,23 +31,15 @@ void loop() {
   delayMicroseconds(5);
   digitalWrite(pingPin, LOW);
 
-  // The same pin is used to read the signal from the PING))): a HIGH pulse
-  // whose duration is the time (in microseconds) from the sending of the ping
-  // to the reception of its echo off of an object.
+ 
   pinMode(pingPin, INPUT);
   duration = pulseIn(pingPin, HIGH);
 
-  // convert the time into a distance
+
   inches = microsecondsToInches(duration);
   cm = microsecondsToCentimeters(duration);
 
-  //Serial.print(inches);
-  //Serial.print("in, ");
-  //Serial.print(cm);
-  //Serial.print("cm");
-  //Serial.println();
-  //delay(100);
-  
+
   servo1.write(0);
   
   if(cm < 40)
@@ -60,7 +52,6 @@ void loop() {
     servo1.write(0);
   }
   
-  // PIR with LED starts
   int pir = digitalRead(2);
   
   if(pir == HIGH)
@@ -72,7 +63,7 @@ void loop() {
   {
     digitalWrite(4,LOW);
   }
-  //burglar alarm
+  
   Serial.println(digitalRead(2));
   if (digitalRead(2) == 1) {
     digitalWrite(10, HIGH);
@@ -81,7 +72,7 @@ void loop() {
   }
   delay(10);
   
-  //temp with fan
+
   float value=analogRead(A0);
   float temperature=value*0.48;
   
